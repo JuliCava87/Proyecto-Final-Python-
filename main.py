@@ -3,12 +3,18 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get("/")
+@app.get("plan-GIRSU")
 async def root():
-    return {"message": "Bienvenido a mi sistema"}
+    return {"message": "Aprendamos a consumir y generar residuos con conciencia"}
+    # "Es una estrategia transversal, en articulación con provincias y municipios, que promueve el saneamiento ambiental" 
+    # "y la optimización de recursos para garantizar una gestión moderna y eficiente de los residuos sólidos urbanos,"
+    # "bajo el paradigma de la economía circular." 
+    # "Fomentando a la separación en origen, el reciclado, la reutilización y la valorización de los residuos para convertirlos en "
+    # "insumos de los procesos productivos."
+    
 
-@app.get("/cantidad-de-residuos/")
-async def read_item(poblacion:int,CteResiduosHab:int):
+@app.get("/cantidad-de-residuos-en-tu-localidad/")
+async def read_item(poblacion:int,CteResiduosHab:float):
     CantidadResiduos=poblacion*CteResiduosHab
     return {"CantidadResiduos": CantidadResiduos,"poblacion":poblacion,"CteResiduosHab":CteResiduosHab}
 
@@ -42,7 +48,10 @@ async def read_item(CantidadResiduos:int,tipoMaterial:int):
         organicos = CantidadResiduosDia * .51
         Ganancia_anual_organicos = "El compost es un abono lleno de nutrientes que nos sirve para mejorar el suelo de nuestro jardín o abonar nuestras plantas, una alternativa más respetuosa con el medio ambiente que los fertilizantes químicos."
         return {"ganancia_anual":Ganancia_anual_organicos,"tipo_de_material":"organicos"}
-
+    if tipoMaterial == 6: 
+        otros = CantidadResiduosDia * .15
+        Ganancia_anual_otros = "El 15 '%' de los residuos que generamos no es posible reciclarlos de manera directa, sin realizar procesos fisico-quimicos para volver a obtener la materia prima pura"
+        return {"ganancia_anual":Ganancia_anual_otros,"tipo_de_material":"otros"}
         
     return {"error":"tipo de material invalido"}
 
@@ -50,7 +59,7 @@ async def read_item(CantidadResiduos:int,tipoMaterial:int):
 @app.get("/Informacion/")
 async def read_info(tipoMaterial:int):
     if tipoMaterial == 0:
-        Info_general = "IIIINFO GLOBAL"
+        Info_general = "porcentajes de residuos domiciliarios ponderados según nación"
         return {
             "info":Info_general,
             "porcentaje_residuos":[{"Metales":2},{"CartonYPapel":15},{"plasticos":13},{"vidrios":4},{"Organico":51},{"otros":15}]
@@ -58,25 +67,25 @@ async def read_info(tipoMaterial:int):
 
 
     if tipoMaterial == 1:
-        Info_Metal = "se estima que en los BCA, casi el 2 '%' corresponde a metales, los cuales son de fácil separación en origen y pueden ser reciclados, teniendo además un alto valor de reventa"
+        Info_Metal = "se estima que el 2 '%' de nuestros residuos corresponde a metales, los cuales son de fácil separación en origen y pueden ser reciclados, teniendo además un alto valor de reventa"
         return {
             "info":Info_Metal,
             "porcentaje_residuos":[{"Metales":2}]
         }
     if tipoMaterial == 2: 
-        Info_CartonYPapel = "se estima que en los BCA un 15 '%' corresponde a este tipo de materiales, es necesario compactarlo y enfardarlo para después venderlo"
+        Info_CartonYPapel = "se estima que un 15 '%' de nuestros residuos esta en este grupo, una vez separado, es necesario compactarlo y enfardarlo para después venderlo"
         return {
             "info":Info_CartonYPapel,
             "porcentaje_residuos":[{"CartonYPapel":15}]
         }
     if tipoMaterial == 3:
-        Info_plasticos = "Se estima que en los BCA un 13 porciento corresponde a plásticos, los cuales al ser incinerados son los principales formadores de dioxinas y furanos, reciclandolos no solo se obtiene un beneficio económico, sino que se previene este contaminante cuando existe la quema de residuos"
+        Info_plasticos = "Se estima que un 13 '%' de nuestros residuos son plásticos, los cuales al ser incinerados son los principales formadores de dioxinas y furanos sustancias altamente cancerígenas, reciclandolos se obtiene un beneficio económico y se evita la generación de contaminantes secundarios, para reciclarlos es necesario además de la separación en origen clasificarlos en PET, PVC, PEAD, PEBD, y además clasificarlos según el color"
         return {
             "info":Info_plasticos,
             "porcentaje_residuos":[{"plasticos":13}]
             }
     if tipoMaterial == 4: 
-        Info_vidrios = "se estima que en los BCA un 4 porciento son vidrios, son fáciles de reciclar"
+        Info_vidrios = "Aproximadamente un 4 porciento de lo que descartamos son vidrios, siendo este material el más fácil de recilcar siempre que exista una preclasificación en origen"
         return {
             "info":Info_vidrios,
             "porcentaje_residuos":[{"vidrios":4}]
