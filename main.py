@@ -50,16 +50,16 @@ async def read_item(CantidadResiduos:int,tipoMaterial:int):
         Ganancia_anual_plastico = Plasticos * Precio_Plastico_04_22 * 365
         return {"ganancia_anual":Ganancia_anual_plastico,"tipo_de_material":"plasticos"}
     if tipoMaterial == 4: 
-        Vidrios = CantidadResiduosDia * .041
+        Vidrios = CantidadResiduos * .041
         Precio_Vidrio_04_22 = 6
         Ganancia_anual_vidrio = Vidrios * Precio_Vidrio_04_22 * 365
         return {"ganancia_anual":Ganancia_anual_vidrio,"tipo_de_material":"vidrios"}
     if tipoMaterial == 5: 
-        organicos = CantidadResiduosDia * .51
+        organicos = CantidadResiduos * .51
         Ganancia_anual_organicos = "El compost es un abono lleno de nutrientes que nos sirve para mejorar el suelo de nuestro jardín o abonar nuestras plantas, una alternativa más respetuosa con el medio ambiente que los fertilizantes químicos."
         return {"ganancia_anual":Ganancia_anual_organicos,"tipo_de_material":"organicos"}
     if tipoMaterial == 6: 
-        otros = CantidadResiduosDia * .15
+        otros = CantidadResiduos * .15
         Ganancia_anual_otros = "El 15 '%' de los residuos que generamos no es posible reciclarlos de manera directa, sin realizar procesos fisico-quimicos para volver a obtener la materia prima pura"
         return {"ganancia_anual":Ganancia_anual_otros,"tipo_de_material":"otros"}
         
@@ -114,5 +114,4 @@ async def read_info(tipoMaterial:int):
             "info":Info_Otros,
             "porcentaje_residuos":[{"Otros":15}]
             }            
-    #  devolver info reelevante respecto a porcentaje de residuos a nivel nación
-    # return {"alert":"metodo en construccion" }
+    
