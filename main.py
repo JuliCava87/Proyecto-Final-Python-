@@ -15,16 +15,24 @@ async def root():
       "Aprendamos a consumir y generar residuos con conciencia"}
     
 
-@app.get("/cantidad-de-residuos-en-tu-localidad/")
+@app.get("/componentes-de-tu-basura/")
+async def Lista():
+    return {"1":"metales", "2":"Carton", "3":"plasticos", "4":"vidrios", "5":"organicos","6":"Otros",
+
+    "Importante" : "Para reciclar es necesario preclasificar en tu domicilio"}
+
+@app.get("/cantidad-de-residuos-generados-en-tu-localidad/")
 async def read_item(poblacion:int,CteResiduosHab:float):
     CantidadResiduos=poblacion*CteResiduosHab
-    return {"CantidadResiduos": CantidadResiduos,"poblacion":poblacion,"CteResiduosHab":CteResiduosHab}
+    return {"CantidadResiduos": CantidadResiduos,"poblacion":poblacion,"CteResiduosHab":CteResiduosHab,
+    CantidadResiduos: "kg de basura son producidos diariamente en tu localidad",
+    "mensaje" : "si no se aplica una gestión a estos residuos, terminan en un sitio de disposición final,"
+    "probablemente un basural a cielo abierto, donde no solo no va a volver a la economía, sino que se genera un"
+    "foco contaminante donde abundan vectores transmisores de enfermedades, se producen lixiviados y se quema la "
+    "basura para reducir el volumen, generando nuevos contaminantes gaseosos"}
 
-@app.get("/tipo-material/")
-async def Lista():
-    return {"1":"metales", "2":"Carton", "3":"plasticos", "4":"vidrios", "5":"organicos","6":"Otros"}
 
-@app.get("/cantidad-posible-reciclar/")
+@app.get("/aplicando-GIRSU-es-posible-reciclar-en-tu-localidad-esta-cantidad/")
 async def read_item(CantidadResiduos:int,tipoMaterial:int):
     if tipoMaterial == 1:
         Precio_Metal = 18
