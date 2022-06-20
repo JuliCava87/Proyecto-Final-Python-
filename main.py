@@ -3,14 +3,16 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get("plan-GIRSU")
+@app.get("/GIRSU")
 async def root():
-    return {"message": "Aprendamos a consumir y generar residuos con conciencia"}
-    # "Es una estrategia transversal, en articulación con provincias y municipios, que promueve el saneamiento ambiental" 
-    # "y la optimización de recursos para garantizar una gestión moderna y eficiente de los residuos sólidos urbanos,"
-    # "bajo el paradigma de la economía circular." 
-    # "Fomentando a la separación en origen, el reciclado, la reutilización y la valorización de los residuos para convertirlos en "
-    # "insumos de los procesos productivos."
+    return {"GIRSU": "Gestion Integral De Residuos Solidos Urbanos :"
+
+      "Es una estrategia transversal, en articulación con provincias y municipios, que promueve el saneamiento ambiental" 
+      "y la optimización de recursos para garantizar una gestión moderna y eficiente de los residuos sólidos urbanos,"
+      "bajo el paradigma de la economía circular." 
+      "Fomentando a la separación en origen, el reciclado, la reutilización y la valorización de los residuos para convertirlos en "
+      "insumos de los procesos productivos."
+      "Aprendamos a consumir y generar residuos con conciencia"}
     
 
 @app.get("/cantidad-de-residuos-en-tu-localidad/")
