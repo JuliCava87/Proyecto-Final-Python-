@@ -115,3 +115,10 @@ async def read_info(tipoMaterial:int):
             "porcentaje_residuos":[{"Otros":15}]
             }            
     
+@app.put("/aplicando-GIRSU-es-posible-reciclar-en-tu-localidad-esta-cantidad/{Precio_Metal}")
+def update_item(Precio_Metal: int):
+    return {"Precio_Metal": Precio_Metal}
+
+@app.put("/aplicando-GIRSU-es-posible-reciclar-en-tu-localidad-esta-cantidad/{Precio_CartonYPapel_04_22}")
+def update_item(Precio_CartonYPapel_04_22: int):
+    return {"Precio_mercado": Precio_CartonYPapel_04_22}
